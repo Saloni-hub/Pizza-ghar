@@ -1,0 +1,47 @@
+<section class="orders light-section">
+    <div class="container mx-auto pt-12">
+        <h1 class="font-bold text-lg mb-4 px-4">All orders</h1>
+        <% if(messages.success) {%>
+        <div id="success-alert" class="flex mx-auto items-center bg-green-400 text-white text-sm font-bold px-4 py-3" role="alert">
+            <p><%= messages.success%></p>
+        </div>
+        <% } %>
+        <table class="w-full table-auto bg-white">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left text-black">Order</th>
+                    <th class="px-4 py-2 text-left text-black">Address</th>
+                    <th class="px-4 py-2 text-left text-black">Phone</th>
+                    <th class="px-4 py-2 text-left text-black">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(orders.length) {%>
+                    <% orders.forEach((order) => { %>
+                        <tr>
+                            <td class="border px-4 py-2 ">
+                                <a href="/customer/orders/<%= order._id%>" class="link"><%= order._id %></a>
+                            </td>
+                            <td class="border px-4 py-2 text-black">
+                                <%= order.address %>
+                            </td>
+                            <td class="border px-4 py-2 text-black">
+                                <%= order.phone%>
+                            </td>
+                            <td class="border px-4 py-2 text-black">
+                                <%= moment(order.createdAt).format('hh:mm: A') %>
+                            </td>
+                        </tr>
+                   <% }) %>
+                <% } else {%>
+
+                    <tr>
+                        <td class="p-4">No orders found</td>
+                        </td>
+                    </tr>
+                
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</section>
